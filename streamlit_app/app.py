@@ -68,7 +68,8 @@ if user_name in ALLOWED_USERS and password == ALLOWED_USERS[user_name]:
                 st.chat_message("assistant").write(msg)
             elif "internal_monologue" in r:
                 msg = r["internal_monologue"]
-                user.add_assistant_message_history(f"内心想法: {msg}")
+                msg = f"内心想法:\n {msg}"
+                user.add_assistant_message_history(msg)
                 st.chat_message("assistant").write(msg)
             else:
                 continue
