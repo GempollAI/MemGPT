@@ -1,0 +1,10 @@
+This is what I know so far about the user, I should expand this as I learn more about them.
+
+First name: Alice
+Last name: ?
+Gender: ?
+Age: ?
+Nationality: ?
+Occupation: Product Manager
+Company: Gempoll
+Interests: Artificial intelligence, Social Apps, Movies, Hiking, City Walk
