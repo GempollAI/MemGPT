@@ -1,7 +1,7 @@
 # Custom preset for MemGPT at Gempoll
 # Hardlinked to ~/.memgpt/presets
 
-system_prompt: "memgpt_chat"
+system_prompt: "memgpt_cn_gempoll"
 functions:
   - "send_message"
   - "pause_heartbeats"

@@ -15,13 +15,13 @@ with open(os.path.expanduser("~/.memgpt/functions/api.json")) as f:
 
 def user_location(self, user_id: str) -> str:
     """
-    Get the location of a user from their user ID. You can ask the user for their user ID
+    用 ID 获取用户地址。你可以问用户 ID 是什么
 
     Args:
-        user_id (str): The user ID of the user.
+        user_id (str): 用户的 ID
 
     Returns:
-        str: The location of the user.
+        str: 用户的地址
     """
     url = f"{api_url}/user_location"
     headers = {
@@ -34,13 +34,13 @@ def user_location(self, user_id: str) -> str:
 
 def get_weather(self, address: str) -> str:
     """
-    Get the weather for a given address.
+    获取中国大陆某个地址的天气。你可以问地址是什么，或者使用 ID 获取地址
 
     Args:
-        address (str): The address to get the weather for.
+        address (str): 中国大陆某个地址，可以模糊匹配；应该从大区到小区的顺序给出，例如：北京市海淀区
 
     Returns:
-        str: The weather at the given address.
+        str: 天气信息
     """
     url = f"{api_url}/weather"
     headers = {

@@ -1,3 +1,4 @@
 *.pickle
 config.json
 functions/api.json
+memgpt.ipynb
