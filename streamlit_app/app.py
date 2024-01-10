@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timedelta
 
-from utils import User, delete_memgpt_agent
+from utils import User
 
 import streamlit as st
 
@@ -30,14 +30,14 @@ with st.sidebar:
 
 if user_name in ALLOWED_USERS and password == ALLOWED_USERS[user_name]:
     # Set up states
-    agent_name = f"{user_name}_memgpt"
-    agent_id = CLIENT.create_agent(agent_config={
-        "name": agent_name,
-        "persona": "sam_pov",
-        "human": "alice_the_pm",
-    })
-    agent_memory = CLIENT.get_agent_memory(agent_id)
     user = User(user_name)
+    agent_name = f"{user_name}_memgpt_{user.agent_idx}"
+    agent_state = CLIENT.create_agent(agent_config={
+        "name": agent_name,
+        "persona": "sam_cn",
+        "human": "alice_the_pm_cn",
+    })
+    agent_memory = CLIENT.get_agent_memory(agent_state.id)
     now = datetime.now()
 
     # Display chatbot
@@ -60,7 +60,7 @@ if user_name in ALLOWED_USERS and password == ALLOWED_USERS[user_name]:
         user.add_user_message_to_history(message)
         st.chat_message("user").write(message)
         # Write assistant messages
-        response = CLIENT.user_message(agent_id=agent_id, message=message)
+        response = CLIENT.user_message(agent_id=agent_state.id, message=message)
         for r in response:
             if "assistant_message" in r:
                 msg = r["assistant_message"]
@@ -78,8 +78,9 @@ if user_name in ALLOWED_USERS and password == ALLOWED_USERS[user_name]:
     if len(user.history) > 0:
         if st.button("Clear All History"):
             user.history.clear()
+            user.agent_idx += 1
             user.save()
-            print(f"Cleared Memory: {delete_memgpt_agent(agent_name)}")
+            print(f"Cleared Memory: {agent_name}")
             st.rerun()
     user.save()
 else:
